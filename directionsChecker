@@ -1,0 +1,45 @@
+/**
+*@Description: takes in an array of n s e w and returns true if there are 10 steps and that you'll end up back where you started(e.g. equal n/s and e/w
+**/
+function isValidWalk(walk) {
+
+  /**Begin Helper Functions and Variables**/
+  var directionsObject = {};
+  
+  //iterate through the array and create an object with how many times for each direction
+  function createDirectionsObject(walk){
+    var directions = {};
+    
+    directions = walk.reduce(function(object, current){
+      if(object[current] === undefined){
+        object[current] = 1;
+      }
+      else{
+        object[current] += 1;
+      }
+      return object;
+    },{});
+    
+    return directions;
+    
+  }
+  
+  //checks to see if you have an equal number of n/s and e/w
+  function testDirections(directions){
+    if(directions['n'] === directions['s'] && directions['e'] === directions['w']){
+      return true;
+    }
+    return false;
+  }
+  
+  /**End Functions and variable Definitions**/
+  
+  /**Start doing stuff**/
+  if(walk.length === 10){
+     directionsObject = createDirectionsObject(walk);
+     if(testDirections(directionsObject)){
+       return true;
+     }    
+  }
+  return false;
+}
